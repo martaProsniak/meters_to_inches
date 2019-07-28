@@ -2,6 +2,7 @@ package com.mp.android.meterstoinches;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,11 +30,17 @@ public class MainActivity extends AppCompatActivity {
                 double multipler = 39.37;
                 double result = 0.0;
 
-                // gets user input, converts it to String and then parse it to double
-                double metersInput = Double.parseDouble(enteredMeters.getText().toString());
-                result = metersInput * multipler;
+                if (enteredMeters.getText().toString().equals("")){
+                    resultTextView.setText(R.string.error_message);
+                    resultTextView.setTextColor(Color.RED);
+                } else {
+                    // gets user input, converts it to String and then parse it to double
+                    double metersInput = Double.parseDouble(enteredMeters.getText().toString());
+                    result = metersInput * multipler;
+                    resultTextView.setTextColor(Color.DKGRAY);
+                    resultTextView.setText(String.format("%.2f",  result) + " inches");
+                }
 
-                resultTextView.setText(result + " inches");
             }
         });
     }
